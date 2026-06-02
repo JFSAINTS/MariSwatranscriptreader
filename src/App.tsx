@@ -10,7 +10,6 @@ import { UpdateModal } from "@/components/UpdateModal";
 import { SplashScreen } from "@/components/SplashScreen";
 import { useUpdateCheck } from "@/hooks/useUpdateCheck";
 import Index from "./pages/Index";
-import YouTubeDownloader from "./pages/YouTubeDownloader";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,7 +32,6 @@ function AppContent() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/youtube-downloader" element={<YouTubeDownloader />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

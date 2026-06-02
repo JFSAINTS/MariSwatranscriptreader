@@ -18,9 +18,6 @@ const NotFound = () => {
           <a href="/" className="text-primary underline hover:text-primary/90">
             Volver al inicio
           </a>
-          <a href="/youtube-downloader" className="text-primary underline hover:text-primary/90">
-            Descargador de Videos de YouTube
-          </a>
         </div>
       </div>
       <div className="absolute bottom-6">
