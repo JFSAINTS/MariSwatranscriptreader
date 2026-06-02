@@ -12,7 +12,7 @@ import { TranslationPanel } from '@/components/pdf/TranslationPanel';
 import { StarsBackground } from '@/components/StarsBackground';
 import { Loader2, FileWarning } from 'lucide-react';
 
-const PDF_URL = '/sample.pdf';
+const PDF_URL = `${import.meta.env.BASE_URL}sample.pdf`;
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
