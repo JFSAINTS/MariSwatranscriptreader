@@ -2,10 +2,13 @@ import { useState, useCallback } from 'react';
 import { useTheme } from 'next-themes';
 import { usePdfDocument } from '@/hooks/usePdfDocument';
 import { useBookmarks } from '@/hooks/useBookmarks';
+import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
+import { usePDFPageText } from '@/hooks/usePDFPageText';
 import { PdfCanvas } from '@/components/pdf/PdfCanvas';
 import { ViewerToolbar } from '@/components/pdf/ViewerToolbar';
 import { SidePanel } from '@/components/pdf/SidePanel';
 import { SearchOverlay } from '@/components/pdf/SearchOverlay';
+import { TranslationPanel } from '@/components/pdf/TranslationPanel';
 import { Loader2, FileWarning } from 'lucide-react';
 
 const PDF_URL = '/sample.pdf';
@@ -15,7 +18,14 @@ const Index = () => {
   const [zoom, setZoom] = useState(1);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [translationOpen, setTranslationOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  // Extraer texto de la página actual
+  const { pageText } = usePDFPageText({
+    pdfUrl: PDF_URL,
+    pageNumber: currentPage,
+  });
 
   const {
     numPages, loading, error, outline,
@@ -23,7 +33,7 @@ const Index = () => {
   } = usePdfDocument(PDF_URL);
 
   const {
-    bookmarks, removeBookmark, updateBookmark, isBookmarked, toggleBookmark,
+    bookmarks, removeBookmark, updateBookmark, updateBookmarkCategory, isBookmarked, toggleBookmark,
   } = useBookmarks();
 
   const handlePageChange = useCallback((page: number) => {
@@ -43,6 +53,17 @@ const Index = () => {
     setSearchOpen(false);
   }, []);
 
+  useKeyboardNavigation({
+    onNextPage: () => handlePageChange(currentPage + 1),
+    onPrevPage: () => handlePageChange(currentPage - 1),
+    onToggleSearch: () => setSearchOpen(prev => !prev),
+    onToggleBookmark: () => toggleBookmark(currentPage),
+    onOpenGotoDialog: () => {}, // Optional: could implement a goto dialog
+    onZoomIn: () => setZoom(prev => Math.min(4, prev + 0.1)),
+    onZoomOut: () => setZoom(prev => Math.max(0.5, prev - 0.1)),
+    onResetZoom: () => setZoom(1),
+  });
+
   return (
     <div className="h-[100dvh] flex flex-col bg-background overflow-hidden">
       <ViewerToolbar
@@ -57,6 +78,7 @@ const Index = () => {
         onZoomChange={setZoom}
         isDark={theme === 'dark'}
         onToggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        onToggleTranslation={() => setTranslationOpen(prev => !prev)}
       />
 
       <div className="flex flex-1 overflow-hidden relative">
@@ -92,6 +114,7 @@ const Index = () => {
               onOutlineClick={handleOutlineClick}
               onRemoveBookmark={removeBookmark}
               onUpdateBookmark={updateBookmark}
+              onUpdateBookmarkCategory={updateBookmarkCategory}
               numPages={numPages}
               currentPage={currentPage}
               renderPage={renderPage}
@@ -114,6 +137,13 @@ const Index = () => {
               onClose={() => setSearchOpen(false)}
               onSearch={searchAllPages}
               onNavigate={handleSearchNavigate}
+            />
+
+            <TranslationPanel
+              pageText={pageText}
+              pageNumber={currentPage}
+              isOpen={translationOpen}
+              onClose={() => setTranslationOpen(false)}
             />
           </>
         )}

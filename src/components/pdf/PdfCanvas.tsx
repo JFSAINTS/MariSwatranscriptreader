@@ -1,4 +1,6 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
+import { useYouTubeDetector } from '@/hooks/useYouTubeDetector';
+import { YouTubeModal } from './YouTubeModal';
 
 interface LinkAnnotation {
   url: string;
@@ -27,6 +29,9 @@ export function PdfCanvas({ renderPage, getPageViewport, getPageAnnotations, pag
   const pinchStartDist = useRef<number | null>(null);
   const pinchStartZoom = useRef<number>(1);
   const containerDims = useRef<{ width: number; height: number }>({ width: 0, height: 0 });
+
+  // YouTube detector hook
+  const { state: youtubeState, isYouTubeUrl, getVideoId, openYouTubeOptions, closeYouTubeOptions, downloadVideo } = useYouTubeDetector();
 
   // Track container size via ResizeObserver to avoid forced reflow
   useEffect(() => {
@@ -99,6 +104,8 @@ export function PdfCanvas({ renderPage, getPageViewport, getPageAnnotations, pag
     return () => { cancelled = true; };
   }, [renderPage, getPageViewport, getPageAnnotations, pageNumber, zoom]);
 
+  const lastDoubleTapRef = useRef<number>(0);
+
   // Swipe for page navigation (single finger)
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     if (e.touches.length === 1) {
@@ -136,12 +143,23 @@ export function PdfCanvas({ renderPage, getPageViewport, getPageAnnotations, pag
     const diffX = touchStart.current.x - endX;
     const diffY = Math.abs(touchStart.current.y - endY);
 
-    if (Math.abs(diffX) > 60 && diffY < 80) {
+    // Double-tap to reset zoom
+    const now = Date.now();
+    if (now - lastDoubleTapRef.current < 300 && Math.abs(diffX) < 40 && diffY < 40) {
+      if (onZoomChange) onZoomChange(1);
+      lastDoubleTapRef.current = 0;
+      touchStart.current = null;
+      return;
+    }
+    lastDoubleTapRef.current = now;
+
+    // Swipe navigation: 40px threshold (reduced from 60px)
+    if (Math.abs(diffX) > 40 && diffY < 80) {
       if (diffX > 0) onSwipeLeft?.();
       else onSwipeRight?.();
     }
     touchStart.current = null;
-  }, [onSwipeLeft, onSwipeRight]);
+  }, [onSwipeLeft, onSwipeRight, onZoomChange]);
 
   // Mouse wheel zoom (desktop)
   const handleWheel = useCallback((e: React.WheelEvent) => {
@@ -170,22 +188,53 @@ export function PdfCanvas({ renderPage, getPageViewport, getPageAnnotations, pag
           className={`shadow-xl rounded-sm ${rendering ? 'opacity-50' : 'opacity-100'}`}
           style={canvasSize.width > 0 ? { width: canvasSize.width, height: canvasSize.height } : { width: 'min(calc(100vw - 32px), 60vh)', aspectRatio: '1 / 1.414' }}
         />
-        {links.map((link, i) => (
-          <a
-            key={i}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute border border-transparent hover:border-primary/40 hover:bg-primary/10 rounded-sm cursor-pointer transition-colors"
-            style={{
-              left: `${link.left}px`,
-              top: `${link.top}px`,
-              width: `${link.width}px`,
-              height: `${link.height}px`,
-            }}
-            title={link.url}
+        {links.map((link, i) => {
+          const isYT = isYouTubeUrl(link.url);
+          return (
+            <div
+              key={i}
+              className="absolute border border-transparent hover:border-primary/40 hover:bg-primary/10 rounded-sm cursor-pointer transition-colors"
+              style={{
+                left: `${link.left}px`,
+                top: `${link.top}px`,
+                width: `${link.width}px`,
+                height: `${link.height}px`,
+              }}
+              title={link.url}
+              onClick={(e) => {
+                if (isYT) {
+                  e.preventDefault();
+                  openYouTubeOptions(link.url);
+                } else {
+                  window.open(link.url, '_blank', 'noopener,noreferrer');
+                }
+              }}
+              role="link"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  if (isYT) {
+                    openYouTubeOptions(link.url);
+                  } else {
+                    window.open(link.url, '_blank', 'noopener,noreferrer');
+                  }
+                }
+              }}
+            />
+          );
+        })}
+
+        {/* YouTube Modal */}
+        {youtubeState.video && (
+          <YouTubeModal
+            isOpen={youtubeState.isOpen}
+            videoUrl={youtubeState.video.url}
+            videoId={youtubeState.video.videoId}
+            onClose={closeYouTubeOptions}
+            onDownload={downloadVideo}
           />
-        ))}
+        )}
       </div>
     </div>
   );

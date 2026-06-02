@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "MariSwa PDF Viewer (Full)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:full"],
+      "port": 8080
+    }
+  ]
+}

@@ -150,4 +150,53 @@
     background-color: hsl(var(--muted-foreground) / 0.3);
     border-radius: 3px;
   }
+
+  /* Safe area insets for notch devices (iOS) */
+  .safe-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+
+  .safe-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-left {
+    padding-left: max(0.5rem, env(safe-area-inset-left));
+  }
+
+  .safe-right {
+    padding-right: max(0.5rem, env(safe-area-inset-right));
+  }
+
+  .safe-inset {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+    padding-left: max(0.5rem, env(safe-area-inset-left));
+    padding-right: max(0.5rem, env(safe-area-inset-right));
+  }
+
+  /* Modern design improvements */
+  .toolbar-gradient {
+    @apply bg-gradient-to-r from-card via-card to-card/80;
+  }
+
+  .button-hover-accent {
+    @apply transition-all duration-200 hover:bg-primary/10 hover:text-primary;
+  }
+
+  .card-elevated {
+    @apply transition-all duration-200 hover:shadow-lg hover:scale-105;
+  }
+
+  .separator-accent {
+    @apply w-px h-6 bg-gradient-to-b from-primary/0 via-primary/30 to-primary/0;
+  }
+
+  .smooth-transition {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .badge-offline {
+    @apply absolute top-1 right-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-green-500/90 text-white;
+  }
 }
