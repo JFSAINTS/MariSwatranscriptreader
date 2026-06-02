@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,11 +6,42 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { UpdateModal } from "@/components/UpdateModal";
+import { useUpdateCheck } from "@/hooks/useUpdateCheck";
 import Index from "./pages/Index";
 import YouTubeDownloader from "./pages/YouTubeDownloader";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+function AppContent() {
+  const { updateInfo, downloadAndInstall } = useUpdateCheck();
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+
+  useEffect(() => {
+    if (updateInfo?.hasUpdate) {
+      setShowUpdateModal(true);
+    }
+  }, [updateInfo]);
+
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/youtube-downloader" element={<YouTubeDownloader />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+      <UpdateModal
+        updateInfo={updateInfo}
+        onDownload={downloadAndInstall}
+        isOpen={showUpdateModal}
+        onClose={() => setShowUpdateModal(false)}
+      />
+    </>
+  );
+}
 
 const App = () => (
   <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
@@ -18,13 +50,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/youtube-downloader" element={<YouTubeDownloader />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+          <AppContent />
         </TooltipProvider>
       </QueryClientProvider>
     </LanguageProvider>
