@@ -9,6 +9,7 @@ import { ViewerToolbar } from '@/components/pdf/ViewerToolbar';
 import { SidePanel } from '@/components/pdf/SidePanel';
 import { SearchOverlay } from '@/components/pdf/SearchOverlay';
 import { TranslationPanel } from '@/components/pdf/TranslationPanel';
+import { StarsBackground } from '@/components/StarsBackground';
 import { Loader2, FileWarning } from 'lucide-react';
 
 const PDF_URL = '/sample.pdf';
@@ -65,8 +66,10 @@ const Index = () => {
   });
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-background overflow-hidden">
-      <ViewerToolbar
+    <div className="h-[100dvh] flex flex-col bg-background overflow-hidden relative">
+      <StarsBackground />
+      <div className="relative z-10">
+        <ViewerToolbar
         currentPage={currentPage}
         numPages={numPages}
         onPageChange={handlePageChange}
@@ -80,8 +83,9 @@ const Index = () => {
         onToggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
         onToggleTranslation={() => setTranslationOpen(prev => !prev)}
       />
+      </div>
 
-      <div className="flex flex-1 overflow-hidden relative">
+      <div className="flex flex-1 overflow-hidden relative z-10">
         {loading ? (
           <div className="flex-1 flex items-center justify-center bg-muted/30">
             <div className="w-full max-w-[600px] mx-auto flex flex-col items-center gap-4 px-4">
