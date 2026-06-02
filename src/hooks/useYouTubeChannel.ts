@@ -17,7 +17,13 @@ export interface ChannelInfo {
   videoCount: string;
 }
 
-const YOUTUBE_API_KEY = 'AIzaSyDoKpVJfgsBcC_5DyJve0M3LUnoqTXb8r8';
+// API key should be set via environment variable VITE_YOUTUBE_API_KEY
+// Never commit API keys to the repository
+const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || '';
+
+if (!YOUTUBE_API_KEY) {
+  console.warn('YouTube API key not configured. Set VITE_YOUTUBE_API_KEY environment variable.');
+}
 
 export function useYouTubeChannel() {
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
