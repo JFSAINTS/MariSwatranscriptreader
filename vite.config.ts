@@ -38,8 +38,8 @@ export default defineConfig(({ mode }) => ({
         background_color: "#0f172a",
         display: "standalone",
         orientation: "portrait-primary",
-        start_url: "/",
-        scope: "/",
+        start_url: "/MariSwatranscriptreader/",
+        scope: "/MariSwatranscriptreader/",
         icons: [
           {
             src: "/icons/icon-192.png",
