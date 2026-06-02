@@ -10,6 +10,19 @@
     <meta name="description" content="Visor avanzado de PDF para estudio e investigación portátil">
     <meta name="theme-color" content="#c67b1a" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script>
+      // Handle SPA routing redirect from 404.html
+      (function() {
+        const redirect = sessionStorage.redirect;
+        if (redirect) {
+          delete sessionStorage.redirect;
+          // Navigate to the original route
+          const base = '/MariSwatranscriptreader/';
+          const route = redirect.startsWith('/') ? redirect : '/' + redirect;
+          window.history.replaceState(null, null, base + route.substring(1));
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://unpkg.com" crossorigin>

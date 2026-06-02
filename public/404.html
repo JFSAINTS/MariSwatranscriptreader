@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mari Swa Transcriptos Reader</title>
+  <script>
+    // Redirigir todas las rutas 404 a index.html para SPA routing
+    const pathname = window.location.pathname;
+    const base = '/MariSwatranscriptreader/';
+
+    // Si la ruta contiene un punto (archivo), no redirigir
+    if (!pathname.includes('.')) {
+      // Remover la ruta base si existe
+      let path = pathname.replace(base, '/');
+      // Guardar la ruta original
+      sessionStorage.redirect = path;
+      // Redirigir a index.html
+      window.location.href = base + 'index.html';
+    }
+  </script>
+</head>
+<body>
+  <p>Redirigiendo...</p>
+</body>
+</html>
