@@ -1,289 +1,163 @@
-# Mari Swa Transcript Reader
+# Lector de Transcriptos Mari Swa
 
-Advanced PDF reader with **automatic English translation** for reading Mari Swa and Taygeta transcripts.
+Lector de PDF avanzado con **traducción automática al inglés** para leer transcriptos de Mari Swa y Taygeta.
 
-## 📖 About
+## 📖 Acerca de
 
-Mari Swa Transcript Reader is a modern, feature-rich PDF viewer specifically designed for reading and studying transcripts from **Mari Swa** and **Taygeta** - containing wisdom about consciousness, spirituality, and humanity's cosmic heritage.
+El Lector de Transcriptos Mari Swa es un visor de PDF moderno y completo, específicamente diseñado para leer y estudiar los transcriptos de **Mari Swa** y **Taygeta** - que contienen sabiduría sobre consciencia, espiritualidad y la herencia cósmica de la humanidad.
 
-The application translates entire PDF pages from Spanish to English automatically, allowing readers from around the world to access these important teachings without language barriers.
+La aplicación traduce automáticamente páginas completas de PDF del español al inglés, permitiendo que lectores de todo el mundo accedan a estas enseñanzas importantes sin barreras idiomáticas.
 
-### Content Attribution
+### Atribución de Contenido
 
-⚠️ **Important**: The original content (texts, transcripts, and teachings) in the PDFs belong to **Mari Swa and Taygeta** and are distributed freely for educational and personal use.
+⚠️ **Importante**: El contenido original (textos, transcriptos y enseñanzas) en los PDFs pertenecen a **Mari Swa y Taygeta** y se distribuyen libremente para uso educativo y personal.
 
-This application is a **reader and translation tool** - it does not create or own the content. We simply provide a modern, accessible way to read and understand these materials.
-
----
-
-## ✨ Features
-
-### 🌐 Automatic English Translation
-- Translate entire PDF pages from Spanish to English with a single click
-- **Complete page translation** - no character limits
-- Powered by Google Translate (no API key required)
-- Smart caching for fast re-access
-- Works offline after first load
-
-### 📖 Advanced PDF Reading
-- **Full-text search** across entire document
-- **Bookmarks with categories** for easy reference
-- Bookmark persistence between sessions
-- Jump to specific page
-- Smooth navigation with keyboard shortcuts
-
-### 🎨 Modern Interface
-- **Dark/Light theme** - choose your preference
-- **Responsive design** - works on desktop, tablet, and mobile
-- **Zoom controls** - scale text for readability
-- **Clean, intuitive UI** - minimal learning curve
-- **Accessibility focused** - keyboard navigation support
-
-### 🔄 Offline Support
-- **Service Worker** caches pages for offline reading
-- Continue reading without internet connection
-- PWA installable on mobile devices
-- Auto-sync when connection is restored
+Esta aplicación es una **herramienta de lectura y traducción** - no crea ni posee el contenido. Simplemente proporcionamos una forma moderna y accesible de leer y comprender estos materiales.
 
 ---
 
-## 🚀 Getting Started
+## ✨ Características
 
-### Web Version (Recommended)
-**No installation needed!** Simply visit:
+### 🌐 Traducción Automática al Inglés
+- Traduce páginas completas de PDF del español al inglés con un solo click
+- **Traducción de página completa** - sin límites de caracteres
+- Impulsado por Google Translate (no requiere clave API)
+- Caché inteligente para acceso rápido
+- Funciona sin conexión después de la primera carga
+
+### 📖 Lectura Avanzada de PDF
+- **Búsqueda full-text** en todo el documento
+- **Marcadores con categorías** para referencia fácil
+- Persistencia de marcadores entre sesiones
+- Ir a página específica
+- Navegación suave con atajos de teclado
+
+### 🎨 Interfaz Moderna
+- **Tema oscuro/claro** - elige tu preferencia
+- **Diseño responsive** - funciona en desktop, tablet y móvil
+- **Controles de zoom** - escala el texto para legibilidad
+- **Interfaz limpia e intuitiva** - curva de aprendizaje mínima
+- **Enfoque en accesibilidad** - soporte de navegación por teclado
+
+### 🔄 Soporte sin Conexión
+- **Service Worker** cachea páginas para lectura sin internet
+- Continúa leyendo sin conexión a internet
+- PWA instalable en dispositivos móviles
+- Sincronización automática cuando hay conexión
+
+---
+
+## 🚀 Comenzar
+
+### Versión Web (Recomendado)
+**¡Sin instalación necesaria!** Simplemente visita:
 ```
 https://JFSAINTS.github.io/MariSwatranscriptreader/
 ```
 
-### Android Mobile
-1. Download the APK: [maryswa-transcript-reader-v1.0.4.apk](https://github.com/JFSAINTS/MariSwatranscriptreader/releases/tag/v1.0.4-android)
-2. Transfer to your Android device (Android 8.0+)
-3. Enable "Unknown Sources" in Settings → Security
-4. Open the APK file and tap "Install"
+### Móvil Android
+1. Descarga el APK: [maryswa-transcript-reader-v1.0.4.apk](https://github.com/JFSAINTS/MariSwatranscriptreader/releases/tag/v1.0.4-android)
+2. Transfiere a tu dispositivo Android (Android 8.0+)
+3. Habilita "Fuentes desconocidas" en Configuración → Seguridad
+4. Abre el archivo APK y toca "Instalar"
 
-### Local Development
+### Desarrollo Local
 ```bash
-# Clone repository
+# Clonar repositorio
 git clone https://github.com/JFSAINTS/MariSwatranscriptreader.git
 cd MariSwatranscriptreader/legacy
 
-# Install dependencies
+# Instalar dependencias
 npm install
 
-# Install translation backend
-npm install @vitalets/google-translate-api
-
-# Run development server with translation backend
+# Ejecutar servidor de desarrollo
 npm run dev:full
 
-# Open http://localhost:8080 in your browser
+# Abre http://localhost:8080
 ```
 
 ---
 
-## 📚 How to Use
+## 📚 Cómo Usar
 
-### Basic Navigation
-- **→ arrow key** - Next page
-- **← arrow key** - Previous page
-- **Ctrl+F** - Search text
-- **B** - Toggle bookmark
-- **+/-** - Zoom in/out
-- **0** - Reset zoom to 100%
-- **G** - Go to page dialog
+### Navegación
+- **→ Flecha** - Página siguiente
+- **← Flecha** - Página anterior  
+- **Ctrl+F** - Buscar texto
+- **B** - Marcador
+- **+/-** - Zoom
+- **0** - Zoom 100%
 
-### Using Translation
-1. Navigate to any PDF page with Spanish text
-2. Click the **"T"** button in the toolbar (top right)
-3. Wait for "Translating to English..." message
-4. View complete English translation in modal
-5. Use "Load more content" if translation exceeds 5000 chars
-6. Click "Copy Text" to copy translation
+### Traducir al Inglés
+1. Haz click en botón **"T"** en la barra de herramientas
+2. Espera a que se traduzca
+3. Lee la traducción completa en el modal
+4. Usa "Copiar texto" si necesitas copiar
 
-### Bookmarking
-1. Click **bookmark icon** to save current page
-2. Organize bookmarks by category
-3. Access saved bookmarks from sidebar
-4. Bookmarks persist between sessions
-
-### Search
-1. Press **Ctrl+F** or click search icon
-2. Type text to find
-3. Navigate through results
-4. Search works across entire PDF
+### Marcadores
+1. Haz click en icono de marcador
+2. Organiza por categorías
+3. Accede desde la barra lateral
+4. Se guardan automáticamente
 
 ---
 
-## 🛠 Technical Stack
+## 🙏 Créditos y Atribución
 
-### Frontend
-- **React 18** - UI framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Vite** - Build tool
-- **PDF.js** - PDF rendering
+### Contenido Original
+- **Mari Swa** - Creadora de los transcriptos
+- **Taygeta** - Fuente de la sabiduría
+- **Distribución**: Libre para uso educativo y personal
 
-### Backend
-- **Node.js** - Translation server
-- **Google Translate API** - Translation engine (free tier, no key required)
-- **Express** - Server framework (via Vite proxy)
+### Desarrollo
+- **Frontend**: React + TypeScript
+- **Backend de Traducción**: Node.js
+- **Plataforma**: Lovable AI Studio (https://lovable.dev)
+- **Hosting**: GitHub Pages
 
-### Mobile
-- **Capacitor** - Mobile bridge
-- **Android SDK** - Mobile build
-- **Gradle** - Build system
-
-### Deployment
-- **GitHub Pages** - Web hosting
-- **GitHub Releases** - Distribution
-- **Service Worker** - Offline support
+### Librerías Open Source
+- PDF.js (Mozilla), React (Meta), Vite (Evan You)
+- Tailwind CSS, TypeScript, Google Translate API
 
 ---
 
-## 📦 Releases
+## 📝 Licencia
 
-### v1.0.4 - Automatic English Translation
-**Release Date:** June 2026
+### Contenido
+El contenido de Mari Swa y Taygeta se distribuye **libremente** para:
+- ✅ Estudio personal
+- ✅ Educación
+- ✅ Compartir con otros (con atribución)
+- ✅ Uso no comercial
 
-#### What's New
-- ✨ Automatic English translation of entire PDF pages
-- 🔄 Google Translate integration (no API key needed)
-- 📄 Complete page translation support
-- 💾 Translation caching system
-- 🎯 Per-page translation control
-
-#### Downloads
-- **Web**: https://JFSAINTS.github.io/MariSwatranscriptreader/
-- **Android APK**: [Download](https://github.com/JFSAINTS/MariSwatranscriptreader/releases/tag/v1.0.4-android)
+### Aplicación
+Código abierto y libre para usar, modificar y distribuir.
 
 ---
 
-## 📋 System Requirements
+## 🔗 Enlaces
 
-### Web Version
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- 50MB storage for offline mode
-- JavaScript enabled
-- Service Worker support
-
-### Android
-- **Minimum**: Android 8.0 (API 26)
-- **Recommended**: Android 10+
-- **Storage**: 50MB free space
-- **RAM**: 2GB minimum
+- **Repositorio**: https://github.com/JFSAINTS/MariSwatranscriptreader
+- **Aplicación Web**: https://JFSAINTS.github.io/MariSwatranscriptreader/
+- **Descargas**: https://github.com/JFSAINTS/MariSwatranscriptreader/releases
+- **Lovable**: https://lovable.dev
 
 ---
 
-## 🙏 Credits & Attribution
+## 💡 Consejos
 
-### Original Content
-- **Mari Swa** - Creator and teacher of transcripts
-- **Taygeta** - Source of wisdom teachings
-- **Content License**: Free distribution for educational and personal use
-
-### Development & Technology
-- **Frontend**: TypeScript/React development
-- **Translation Backend**: Node.js custom server
-- **UI Framework**: Built with Lovable AI Studio
-  - **Lovable Platform**: https://lovable.dev
-  - Lovable enables rapid AI-assisted web development
-
-### Open Source Libraries
-- **PDF.js** - Mozilla Foundation
-- **Google Translate API** - Google
-- **React** - Meta Platforms
-- **Vite** - Evan You
-- **Tailwind CSS** - Tailwind Labs
-- **TypeScript** - Microsoft
-
-### Application Credits
-- **Original Content Creator**: Mari Swa & Taygeta
-- **Application Developer**: JFSAINTS
-- **AI Development Platform**: Lovable (https://lovable.dev)
+1. Usa **tema oscuro** por la noche
+2. **Marca** pasajes importantes
+3. **Busca** temas específicos
+4. **Traduce** a inglés si lo necesitas
+5. **Ajusta zoom** para comodidad
 
 ---
 
-## 📝 License & Distribution
-
-### Content License
-The original transcripts and teachings (Mari Swa and Taygeta content) are provided for **free distribution** for:
-- ✅ Personal study and learning
-- ✅ Educational purposes
-- ✅ Sharing with others (with attribution)
-- ✅ Non-commercial use
-
-### Application License
-The Mari Swa Transcript Reader application is open source and free to use, modify, and distribute.
-
-### Attribution Required
-When sharing content or using this application, please maintain attribution to:
-- **Mari Swa** - Original teachings
-- **Taygeta** - Source wisdom
-- **Mari Swa Transcript Reader** - Reading application
+**Versión**: 1.0.4  
+**Actualización**: Junio 2026  
+**Licencia**: Código Abierto (Contenido: Distribución Libre)
 
 ---
 
-## 🐛 Issues & Feedback
-
-Found a bug? Have suggestions? Visit our GitHub:
-- **Issues**: https://github.com/JFSAINTS/MariSwatranscriptreader/issues
-- **Discussions**: https://github.com/JFSAINTS/MariSwatranscriptreader/discussions
-
----
-
-## 🔗 Resources
-
-### Tools & Platforms Used
-- **Lovable**: https://lovable.dev - AI-assisted development platform
-- **GitHub**: https://github.com - Code hosting & releases
-- **Google Translate**: Free translation API
-
-### Repository
-- **GitHub**: https://github.com/JFSAINTS/MariSwatranscriptreader
-- **Web App**: https://JFSAINTS.github.io/MariSwatranscriptreader/
-
----
-
-## 💡 Tips for Best Experience
-
-1. **Use Dark Theme** at night for comfortable reading
-2. **Bookmark Important Passages** for quick reference
-3. **Enable Offline Mode** by visiting once online
-4. **Use Search** to find specific topics
-5. **Translate to English** if reading Spanish transcripts
-6. **Adjust Zoom** for your preferred text size
-
----
-
-## 🌍 Help Us Share
-
-This application makes Mari Swa and Taygeta teachings accessible worldwide. Help spread the knowledge:
-
-- ⭐ Star the GitHub repository
-- 🔗 Share the web app link
-- 📱 Install the Android app
-- 💬 Share feedback and suggestions
-- 🙏 Credit the original authors
-
----
-
-## 🙌 Acknowledgments
-
-Thank you to:
-- **Mari Swa and Taygeta** - For sharing transformative wisdom
-- **The Open Source Community** - For amazing tools and libraries
-- **Lovable AI Studio** - For enabling rapid development
-- **All Users** - For supporting accessible education
-
----
-
-**Mari Swa Transcript Reader** - Making cosmic wisdom accessible to all 🌟
-
-*"The information is freely distributed for the benefit of all humanity."*
-
----
-
-**Version**: 1.0.4
-**Last Updated**: June 2026
-**License**: Open Source (Content: Free Distribution)
-**Repository**: https://github.com/JFSAINTS/MariSwatranscriptreader
+*"La información se distribuye libremente para el beneficio de toda la humanidad."*
