@@ -23,7 +23,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       {/* Logo */}
       <div className="mb-8 animate-fade-in">
         <img
-          src="/icons/icon-256.png"
+          src={`${import.meta.env.BASE_URL}icons/icon-256.png`}
           alt="Mari Swa"
           className="w-32 h-32 rounded-full shadow-2xl"
         />
