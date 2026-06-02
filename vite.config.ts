@@ -38,23 +38,23 @@ export default defineConfig(({ mode }) => ({
         background_color: "#0f172a",
         display: "standalone",
         orientation: "portrait-primary",
-        start_url: "/MariSwatranscriptreader/",
-        scope: "/MariSwatranscriptreader/",
+        start_url: "./index.html",
+        scope: "./",
         icons: [
           {
-            src: "/icons/icon-192.png",
+            src: "./icons/icon-192.png",
             sizes: "192x192",
             type: "image/png",
             purpose: "any",
           },
           {
-            src: "/icons/icon-256.png",
+            src: "./icons/icon-256.png",
             sizes: "256x256",
             type: "image/png",
             purpose: "any",
           },
           {
-            src: "/icons/icon-512.png",
+            src: "./icons/icon-512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
@@ -62,7 +62,7 @@ export default defineConfig(({ mode }) => ({
         ],
         screenshots: [
           {
-            src: "/splash-1080x1920.png",
+            src: "./splash-1080x1920.png",
             sizes: "1080x1920",
             type: "image/png",
             form_factor: "narrow",
