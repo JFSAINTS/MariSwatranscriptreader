@@ -10,15 +10,27 @@ Las API keys, tokens y credenciales **NUNCA** deben estar en el código fuente n
 
 ### Para Desarrollo Local
 
-Crear un archivo `.env.local` en la raíz del proyecto:
+Crear un archivo `.env.local` en la raíz del proyecto (este archivo está en .gitignore y NUNCA será commiteado):
 
 ```env
-# YouTube API Configuration
-VITE_YOUTUBE_API_KEY=tu_api_key_aqui
+# YouTube API Configuration - CONFIDENCIAL
+# ⚠️ IMPORTANTE: Esta key debe permanecer privada SIEMPRE
+# NO compartir, NO publicar, NO commitear a GitHub
+VITE_YOUTUBE_API_KEY=AIzaSyDuxsW1nihF3GfEdkatbHCNy-XBvFxnMA
 
 # Google Cloud Vision (si se usa)
 VITE_GOOGLE_VISION_API_KEY=tu_api_key_aqui
 ```
+
+### ⚠️ ADVERTENCIA DE SEGURIDAD
+
+**La API key de YouTube (AIzaSyDuxsW1nihF3GfEdkatbHCNy-XBvFxnMA) es CONFIDENCIAL:**
+
+- ❌ NUNCA pushearlo a GitHub
+- ❌ NUNCA compartirlo en repositorios públicos
+- ❌ NUNCA publicarlo en redes sociales
+- ❌ NUNCA incluirlo en screenshots o documentación
+- ✅ Mantenerlo SOLO en `.env.local` local
 
 ### Archivo `.env.example`
 
