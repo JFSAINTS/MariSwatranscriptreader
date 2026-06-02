@@ -1,6 +1,6 @@
 {
-  "version": "1.0.5",
-  "notes": "Nueva versión con verificación automática de actualizaciones. Mejoras en la estabilidad y rendimiento.",
+  "version": "1.0.6",
+  "notes": "Fondo de estrellas animado, iconos personalizados, pantalla de inicio y verificación automática de actualizaciones.",
   "downloadUrl": "https://github.com/JFSAINTS/MariSwatranscriptreader/releases",
   "releaseDate": "2026-06-02"
 }

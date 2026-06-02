@@ -8,7 +8,7 @@ export interface UpdateInfo {
   releaseNotes: string;
 }
 
-const APP_VERSION = '1.0.4';
+const APP_VERSION = '1.0.6';
 const GITHUB_REPO = 'JFSAINTS/MariSwatranscriptreader';
 const CHECK_INTERVAL = 24 * 60 * 60 * 1000; // 24 horas
 const LAST_CHECK_KEY = 'lastUpdateCheck';
