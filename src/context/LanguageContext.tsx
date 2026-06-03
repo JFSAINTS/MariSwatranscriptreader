@@ -1,7 +1,8 @@
 import { createContext, useContext, useState, useCallback, useRef, ReactNode } from 'react';
 
 const translationCache = new Map<string, string>();
-const CACHE_KEY_PREFIX = 'pdf-translator-cache-';
+// v2: invalida caché corrupta anterior (valores en español sin traducir)
+const CACHE_KEY_PREFIX = 'pdf-trans-v2-';
 
 interface LanguageContextType {
   currentLanguage: string;
@@ -59,8 +60,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
       if (data.responseStatus === 200 && data.responseData?.translatedText) {
         const translated = data.responseData.translatedText;
-        translationCache.set(cacheKey, translated);
-        localStorage.setItem(`${CACHE_KEY_PREFIX}${cacheKey}`, translated);
+        // Solo cachear si la traducción es diferente al original
+        if (translated.trim().toLowerCase() !== text.trim().toLowerCase()) {
+          translationCache.set(cacheKey, translated);
+          localStorage.setItem(`${CACHE_KEY_PREFIX}${cacheKey}`, translated);
+        }
         return translated;
       }
 
