@@ -43,3 +43,6 @@ out/
 # OS
 Thumbs.db
 .DS_Store
+
+android/
+dist/
