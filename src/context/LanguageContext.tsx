@@ -49,36 +49,24 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     try {
       setTranslating(true);
 
-      // Usar backend local que proxea a LibreTranslate
-      // Evita problemas de CORS del navegador
-      const response = await fetch('/api/translate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: text,
-          source: 'es',
-          target: 'en',
-        }),
-      });
+      // MyMemory API — gratuita, sin API key, funciona directo desde el navegador
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=es|en`;
+      const response = await fetch(url);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const data = await response.json();
 
-      if (data.translatedText && data.translatedText !== text) {
-        translationCache.set(cacheKey, data.translatedText);
-        localStorage.setItem(`${CACHE_KEY_PREFIX}${cacheKey}`, data.translatedText);
-        return data.translatedText;
+      if (data.responseStatus === 200 && data.responseData?.translatedText) {
+        const translated = data.responseData.translatedText;
+        translationCache.set(cacheKey, translated);
+        localStorage.setItem(`${CACHE_KEY_PREFIX}${cacheKey}`, translated);
+        return translated;
       }
 
       return text;
     } catch (error) {
       console.error('Translation error:', error);
-      // Fallback a texto original si hay error
       return text;
     } finally {
       setTranslating(false);
