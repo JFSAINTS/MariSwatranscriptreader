@@ -50,22 +50,27 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     try {
       setTranslating(true);
 
-      // MyMemory API — gratuita, sin API key, funciona directo desde el navegador
-      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=es|en`;
+      // Google Translate API informal (mismo endpoint que usan las extensiones del navegador)
+      // Sin API key, sin registro, funciona directamente desde el browser
+      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl=en&dt=t&q=${encodeURIComponent(text)}`;
       const response = await fetch(url);
 
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const data = await response.json();
 
-      if (data.responseStatus === 200 && data.responseData?.translatedText) {
-        const translated = data.responseData.translatedText;
-        // Solo cachear si la traducción es diferente al original
-        if (translated.trim().toLowerCase() !== text.trim().toLowerCase()) {
+      // El resultado es array anidado: data[0] contiene los fragmentos traducidos
+      if (Array.isArray(data) && Array.isArray(data[0])) {
+        const translated = data[0]
+          .filter((item: any[]) => item && item[0])
+          .map((item: any[]) => item[0])
+          .join('');
+
+        if (translated && translated.trim().toLowerCase() !== text.trim().toLowerCase()) {
           translationCache.set(cacheKey, translated);
           localStorage.setItem(`${CACHE_KEY_PREFIX}${cacheKey}`, translated);
         }
-        return translated;
+        return translated || text;
       }
 
       return text;
