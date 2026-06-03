@@ -53,10 +53,50 @@ export function ViewerToolbar({
   return (
     <header className="h-14 sm:h-14 flex items-center px-2 sm:px-3 gap-0.5 sm:gap-1 border-b toolbar-gradient backdrop-blur-sm shrink-0 z-20 shadow-md smooth-transition">
 
-      {/* Menu button (left) */}
-      <Button variant="ghost" size="icon" onClick={onToggleSidebar} className="shrink-0 p-2 sm:p-1 h-10 w-10 sm:h-8 sm:w-8">
-        <Menu className="h-5 w-5" />
-      </Button>
+      {/* Left group: Menu + Social links */}
+      <div className="flex items-center gap-0.5 shrink-0">
+        <Button variant="ghost" size="icon" onClick={onToggleSidebar} className="shrink-0 p-2 sm:p-1 h-10 w-10 sm:h-8 sm:w-8">
+          <Menu className="h-5 w-5" />
+        </Button>
+
+        <div className="separator-accent hidden sm:block" />
+
+        {/* YouTube */}
+        <a
+          href={YOUTUBE_CHANNEL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 sm:p-1 h-10 w-10 sm:h-8 sm:w-8 flex items-center justify-center rounded-lg button-hover-accent hover:text-red-500"
+          aria-label="Canal de YouTube"
+          title="Visitar canal de YouTube"
+        >
+          <Youtube className="h-4 w-4" />
+        </a>
+
+        {/* Telegram */}
+        <a
+          href={TELEGRAM_GROUP}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 sm:p-1 h-10 w-10 sm:h-8 sm:w-8 flex items-center justify-center rounded-lg button-hover-accent hover:text-blue-500"
+          aria-label="Grupo de Telegram"
+          title="Unirse al grupo de Telegram (Mari Swa Chat)"
+        >
+          <Send className="h-4 w-4" />
+        </a>
+
+        {/* Website */}
+        <a
+          href={WEBSITE}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 sm:p-1 h-10 w-10 sm:h-8 sm:w-8 flex items-center justify-center rounded-lg button-hover-accent hover:text-amber-500"
+          aria-label="Mari Swa Transcripts"
+          title="Ir a Mari Swa Transcripts"
+        >
+          <Globe className="h-4 w-4" />
+        </a>
+      </div>
 
       {/* Navigation (center) */}
       <div className="flex items-center gap-0.5 mx-auto">
@@ -180,45 +220,6 @@ export function ViewerToolbar({
             <span className="text-xs font-bold">T</span>
           </Button>
         )}
-
-        {/* Separator */}
-        <div className="separator-accent hidden sm:block" />
-
-        {/* YouTube */}
-        <a
-          href={YOUTUBE_CHANNEL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-2 sm:p-1 h-10 w-10 sm:h-8 sm:w-8 flex items-center justify-center rounded-lg button-hover-accent hover:text-red-500"
-          aria-label="Canal de YouTube"
-          title="Visitar canal de YouTube"
-        >
-          <Youtube className="h-4 w-4" />
-        </a>
-
-        {/* Telegram */}
-        <a
-          href={TELEGRAM_GROUP}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-2 sm:p-1 h-10 w-10 sm:h-8 sm:w-8 flex items-center justify-center rounded-lg button-hover-accent hover:text-blue-500"
-          aria-label="Grupo de Telegram"
-          title="Unirse al grupo de Telegram (Mari Swa Chat)"
-        >
-          <Send className="h-4 w-4" />
-        </a>
-
-        {/* Website */}
-        <a
-          href={WEBSITE}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-2 sm:p-1 h-10 w-10 sm:h-8 sm:w-8 flex items-center justify-center rounded-lg button-hover-accent hover:text-amber-500"
-          aria-label="Mari Swa Transcripts"
-          title="Ir a Mari Swa Transcripts"
-        >
-          <Globe className="h-4 w-4" />
-        </a>
 
         {/* Separator */}
         <div className="separator-accent hidden sm:block" />
